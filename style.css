@@ -74,3 +74,21 @@
     font-feature-settings: 'pnum' on, 'lnum' on;
     color: #FFFFFF;
 }
+
+.cards__item {
+    margin: 1% 0;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
+  }
+
+  .cards__item--turned {
+    animation-name: rotate;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+  }
+
+  .form__active {
+    background-color: #7AC100;
+  }
