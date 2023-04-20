@@ -92,3 +92,11 @@
 .form__active {
     background-color: #7ac100;
 }
+
+.cards__timer {
+    width: 155px;
+    height: 72px;
+    font-size: 64px;
+    line-height: 72px;
+    color: #ffffff;
+}
