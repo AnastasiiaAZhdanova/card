@@ -7,6 +7,7 @@ const formItemLevel = document.querySelectorAll('.blue_block_items_all');
 const form = document.querySelector('.main');
 
 const cards = document.querySelector('.cards');
+const cardsOpen = document.querySelector('.cards_open');
 const cardsBtn = document.querySelector('.cards__btn');
 const cardsItems = document.querySelector('.cards__items');
 const timeInSeconds = document.getElementById('sec');
@@ -79,6 +80,7 @@ button.addEventListener('click', function (event) {
     if (formItemLevel) {
         form.style.display = 'none';
         cards.style.display = 'block';
+        cardsOpen.style.display = 'block';
         init(cardsItem);
         countTime = setInterval(calcTime, 1000);
     } else {
