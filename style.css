@@ -160,11 +160,13 @@
     align-items: center;
 }
 
-.cards__items_img {
-    width: 95px;
-    height: 133px;
+.cards__item{
+    margin: 1% 0;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: center;
     border-radius: 4px;
-    gap: 15px;
 }
 
 .cards__items{
@@ -176,15 +178,25 @@
     justify-content: space-around;
 }
 
-.cards_open{
-    position: relative;
-    display: none;
-    width: 100%;
-    height: 100vh;
-    max-width: 1500px;
-    margin: 0 auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    z-index: 1;
-    background: #004980;
-}
+.cards__item--turned {
+    animation-name: rotate;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+  }
+
+  @keyframes rotate {
+    0% {
+      transform: rotate3d(0, 1, 0, 0deg);
+    }
+    50% {
+      transform: rotate3d(0, 1, 0, 90deg);
+    }
+    100% {
+      transform: rotate3d(0, 1, 0, 0deg);
+    }
+  }
+
+  .cards__item--low-difficulty {
+    width: 10%;
+    height: 10%;
+  }
