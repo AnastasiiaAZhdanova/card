@@ -1,16 +1,22 @@
-const BlueBlockItemsOne = document.querySelector('.blue_block_items_one');
-const BlueBlockItemsTwo = document.querySelector('.blue_block_items_two');
-const BlueBlockItemsThree = document.querySelector('.blue_block_items_three');
+import './style.css';
+
 const button = document.querySelector('.button');
 const formListLevel = document.querySelector('.blue_block_items');
 const formItemLevel = document.querySelectorAll('.blue_block_items_all');
 const form = document.querySelector('.main');
 
 const cards = document.querySelector('.cards');
+const cardsBtn = document.querySelector('.cards__btn');
 const cardsItems = document.querySelector('.cards__items');
 const timeInSeconds = document.getElementById('sec');
 const timeInMinutes = document.getElementById('min');
 let countTime;
+
+const popupGame = document.querySelector('.popup--game');
+const popupLostGame = document.querySelector('.popup_lost--game');
+const failure = document.querySelector('.popup--failure');
+const popupTime = document.querySelector('.popup__title--time'); // поле вывода результата игроку
+const popupBtnGame = document.querySelector('.popup__btn--game');
 
 let firstTurnedCardIndex;
 let firstTurnedCardId;
@@ -57,6 +63,7 @@ const dataOfCards = [
     { dataId: 36, backgroundImage: 'Q_Spade.jpg' },
 ];
 
+// перемешивание
 Array.prototype.shuffle = function () {
     for (let i = this.length - 1; i >= 0; i--) {
         let randomIndex = Math.floor(Math.random() * (i + 1));
@@ -67,10 +74,16 @@ Array.prototype.shuffle = function () {
     return this;
 };
 
+// рандомный массив
 function randomMixArrays(start, end) {
     let arrCut = dataOfCards.slice(start, end);
     let arrCopy = arrCut.slice();
-    newArrCardsRandomAndSelected = arrCut.concat(arrCopy);
+    type NewArrCardsRandomAndSelected = {
+        dataId: number;
+        backgroundImage: string;
+    }[];
+    let newArrCardsRandomAndSelected: NewArrCardsRandomAndSelected =
+        arrCut.concat(arrCopy);
     newArrCardsRandomAndSelected.shuffle();
     return newArrCardsRandomAndSelected;
 }
@@ -80,6 +93,7 @@ const cardsItem = document.createElement('img');
 fragment.appendChild(cardsItem);
 cardsItem.classList.add('cards__item');
 
+// начало игры
 function init(obj) {
     dataOfCards.shuffle();
 
@@ -98,6 +112,7 @@ function init(obj) {
     return memoryObj;
 }
 
+// отрисовка карты
 let renderCard = function (card, index) {
     const newCard = document.createElement('img');
     newCard.dataset.id = newArrCardsRandomAndSelected[index].dataId;
@@ -107,6 +122,7 @@ let renderCard = function (card, index) {
     return newCard;
 };
 
+// добавление карт
 let addCards = function () {
     for (let i = 0; i < newArrCardsRandomAndSelected.length; i++) {
         let elem = renderCard(newArrCardsRandomAndSelected[i], i);
@@ -121,6 +137,7 @@ let addCards = function () {
     }
 };
 
+// таймер
 function calcTime(sec, min, zeroing) {
     sec = Number(timeInSeconds.textContent);
     min = Number(timeInMinutes.textContent);
@@ -143,6 +160,32 @@ function calcTime(sec, min, zeroing) {
     timeInMinutes.textContent = min;
 }
 
+// выход
+function closeCardsField() {
+    cards.style.display = 'none';
+    form.style.display = 'block';
+    cardsItems.innerHTML = '';
+}
+
+// вывод поздравлений
+function outputResult() {
+    clearInterval(countTime); // остановка таймера
+    popupTime.textContent = min.textContent + ' : ' + sec.textContent; // вывод результата таймера
+    if (!popupGame.classList.contains('popup--show')) {
+        popupGame.classList.add('popup--show');
+    }
+}
+
+// вывод сожалений
+function outputBedResult() {
+    clearInterval(countTime);
+    popupTime.textContent = min.textContent + ' : ' + sec.textContent;
+    if (!popupLostGame.classList.contains('popup--show')) {
+        popupLostGame.classList.add('popup--show');
+    }
+}
+
+// поворот карты
 cardsItems.addEventListener('click', function (e) {
     if (
         e.target.classList.contains('cards__item--turned') &&
@@ -178,23 +221,15 @@ cardsItems.addEventListener('click', function (e) {
             }
             if (count == 2) {
                 if (e.target.getAttribute('data-id') == firstTurnedCardId) {
-                    alert('Вы выиграли!');
-                    closeCardsField();
+                    outputResult();
                 } else {
-                    alert('Вы проиграли!');
-                    closeCardsField();
+                    outputBedResult();
                 }
                 break;
             }
         }
     }
 });
-
-function closeCardsField() {
-    cards.style.display = 'none';
-    form.style.display = 'block';
-    cardsItems.innerHTML = '';
-}
 
 formListLevel.addEventListener('click', function (e) {
     for (let i = 0; i < formItemLevel.length; i++) {
@@ -204,6 +239,7 @@ formListLevel.addEventListener('click', function (e) {
     formListLevel.classList.remove('form__active');
 });
 
+// вход в игру
 button.addEventListener('click', function (event) {
     event.preventDefault();
     if (formItemLevel) {
@@ -211,5 +247,30 @@ button.addEventListener('click', function (event) {
         cards.style.display = 'block';
         init(cardsItem);
         countTime = setInterval(calcTime, 1000);
+    } else {
+        failure.classList.add('popup--show');
     }
+});
+
+// досрочный выход
+let cardsBtnClickHandler = function () {
+    clearInterval(countTime); 
+    calcTime(0, 0, 1); 
+    closeCardsField(); 
+    cards.removeEventListener('click', cardsBtnClickHandler);
+};
+
+cardsBtn.addEventListener('click', cardsBtnClickHandler);
+
+// новая игра
+popupBtnGame.addEventListener('click', function (event) {
+    if (popupGame.classList.contains('popup--show')) {
+        popupGame.classList.remove('popup--show');
+    } else if (popupLostGame.classList.contains('popup--show')) {
+        popupLostGame.classList.remove('popup--show');
+    }
+    cardsItems.innerHTML = ''; 
+    calcTime(0, 0, 1); 
+    init(cardsItem); 
+    countTime = setInterval(calcTime, 1000);
 });
