@@ -74,6 +74,9 @@
     font-feature-settings: 'pnum' on, 'lnum' on;
     color: #ffffff;
 }
+.button:hover {
+    background: #0080c1;
+}
 
 .cards__item {
     margin: 1% 0;
@@ -160,7 +163,7 @@
     align-items: center;
 }
 
-.cards__item{
+.cards__item {
     margin: 1% 0;
     cursor: pointer;
     background-repeat: no-repeat;
@@ -169,7 +172,7 @@
     border-radius: 4px;
 }
 
-.cards__items{
+.cards__items {
     padding-top: 48px;
     display: flex;
     flex-wrap: wrap;
@@ -182,21 +185,101 @@
     animation-name: rotate;
     animation-duration: 0.5s;
     animation-fill-mode: forwards;
-  }
+}
 
-  @keyframes rotate {
+@keyframes rotate {
     0% {
-      transform: rotate3d(0, 1, 0, 0deg);
+        transform: rotate3d(0, 1, 0, 0deg);
     }
     50% {
-      transform: rotate3d(0, 1, 0, 90deg);
+        transform: rotate3d(0, 1, 0, 90deg);
     }
     100% {
-      transform: rotate3d(0, 1, 0, 0deg);
+        transform: rotate3d(0, 1, 0, 0deg);
     }
-  }
+}
 
-  .cards__item--low-difficulty {
+.cards__item--low-difficulty {
     width: 10%;
     height: 10%;
-  }
+}
+
+.popup {
+    /* в скрытом состоянии */
+    display: none;
+    position: fixed;
+    width: 460px;
+    left: 35%;
+    top: 25%;
+    z-index: 5;
+}
+
+.popup--show {
+    /* Отображет popup */
+    display: block;
+}
+
+.popup__wrapper {
+    width: 480px;
+    height: 459px;
+    left: 272px;
+    top: 158px;
+    background: #c2f5ff;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.popup__head {
+    width: 276px;
+    left: 374px;
+    top: 289px;
+    font-family: 'StratosSkyeng';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 40px;
+    line-height: 48px;
+    color: #004980;
+    padding-left: 100px;
+}
+
+.popup__title {
+    width: 230px;
+    padding-top: 28px;
+    font-family: 'StratosSkyeng';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+    color: #000000;
+    padding-left: 120px;
+}
+
+.popup__title--time {
+    font-family: 'StratosSkyeng';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 72px;
+    color: #000000;
+    padding-left: 130px;
+}
+
+.popup__btn--game {
+    width: 246px;
+    height: 50px;
+    background: #7ac100;
+    border-radius: 12px;
+    border-style: none;
+    margin-top: 47px;
+    font-family: 'StratosSkyeng Medium';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+    font-feature-settings: 'pnum' on, 'lnum' on;
+    color: #ffffff;
+}
+
+.popup__btn--game:hover {
+    background: #0080c1;
+}
