@@ -1,29 +1,36 @@
 import './style.css';
 
-const button = document.querySelector('.button');
-const formListLevel = document.querySelector('.blue_block_items');
-const formItemLevel = document.querySelectorAll('.blue_block_items_all');
-const form = document.querySelector('.main');
+const button = document.querySelector<HTMLElement>('.button');
+const formListLevel = document.querySelector<HTMLElement>('.blue_block_items');
+const formItemLevel = document.querySelectorAll<HTMLElement>(
+    '.blue_block_items_all'
+);
+const form = document.querySelector<HTMLElement>('.main');
 
-const cards = document.querySelector('.cards');
-const cardsBtn = document.querySelector('.cards__btn');
-const cardsItems = document.querySelector('.cards__items');
+const cards = document.querySelector<HTMLElement>('.cards');
+const cardsBtn = document.querySelector<HTMLElement>('.cards__btn');
+const cardsItems = document.querySelector<HTMLElement>('.cards__items');
 const timeInSeconds = document.getElementById('sec');
 const timeInMinutes = document.getElementById('min');
 let countTime;
 
-const popupGame = document.querySelector('.popup--game');
-const popupLostGame = document.querySelector('.popup_lost--game');
-const failure = document.querySelector('.popup--failure');
-const popupTime = document.querySelector('.popup__title--time'); // поле вывода результата игроку
-const popupBtnGame = document.querySelector('.popup__btn--game');
+const popupGame = document.querySelector<HTMLElement>('.popup--game');
+const popupLostGame = document.querySelector<HTMLElement>('.popup_lost--game');
+const failure = document.querySelector<HTMLElement>('.popup--failure');
+const popupTime = document.querySelector<HTMLElement>('.popup__title--time');
+const popupBtnGame = document.querySelector<HTMLElement>('.popup__btn--game');
 
 let firstTurnedCardIndex;
 let firstTurnedCardId;
 
-let memoryObj = {};
+type Employee = {
+    shirt?: string;
+  };
+let memoryObj: Employee = {};
+
 
 let newArrCardsRandomAndSelected = [];
+
 const dataOfCards = [
     { dataId: 1, backgroundImage: '6_Club.jpg' },
     { dataId: 2, backgroundImage: '6_Diamond.jpg' },
@@ -84,6 +91,7 @@ function randomMixArrays(start, end) {
     }[];
     let newArrCardsRandomAndSelected: NewArrCardsRandomAndSelected =
         arrCut.concat(arrCopy);
+
     newArrCardsRandomAndSelected.shuffle();
     return newArrCardsRandomAndSelected;
 }
@@ -115,6 +123,7 @@ function init(obj) {
 // отрисовка карты
 let renderCard = function (card, index) {
     const newCard = document.createElement('img');
+    
     newCard.dataset.id = newArrCardsRandomAndSelected[index].dataId;
     newCard.dataset.bg = newArrCardsRandomAndSelected[index].backgroundImage;
     newCard.style.backgroundImage = memoryObj.shirt;
@@ -133,14 +142,20 @@ let addCards = function () {
         if (newArrCardsRandomAndSelected.length > 18) {
             elem.className = 'cards__item';
         }
-        cardsItems.appendChild(elem);
+        if (cardsItems) {
+            cardsItems.appendChild(elem);
+        }
     }
 };
 
 // таймер
 function calcTime(sec, min, zeroing) {
-    sec = Number(timeInSeconds.textContent);
-    min = Number(timeInMinutes.textContent);
+    if (timeInSeconds) {
+        sec = Number(timeInSeconds.textContent);
+    }
+    if (timeInMinutes) {
+        min = Number(timeInMinutes.textContent);
+    }
     sec++;
     if (zeroing) {
         sec = 0;
@@ -156,121 +171,180 @@ function calcTime(sec, min, zeroing) {
     if (min < 10) {
         min = '0' + min;
     }
-    timeInSeconds.textContent = sec;
-    timeInMinutes.textContent = min;
+    if (timeInSeconds) {
+        timeInSeconds.textContent = sec;
+    }
+    if (timeInMinutes) {
+        timeInMinutes.textContent = min;
+    }
 }
 
 // выход
 function closeCardsField() {
-    cards.style.display = 'none';
-    form.style.display = 'block';
-    cardsItems.innerHTML = '';
+    if (cards) {
+        cards.style.display = 'none';
+    }
+    if (form) {
+        form.style.display = 'block';
+    }
+    if (cardsItems) {
+        cardsItems.innerHTML = '';
+    }
 }
 
 // вывод поздравлений
 function outputResult() {
     clearInterval(countTime); // остановка таймера
-    popupTime.textContent = min.textContent + ' : ' + sec.textContent; // вывод результата таймера
-    if (!popupGame.classList.contains('popup--show')) {
-        popupGame.classList.add('popup--show');
+    if (popupTime) {
+       popupTime.textContent = min.textContent + ' : ' + sec.textContent; // вывод результата таймера
+    }
+    if (popupGame) {
+        if (!popupGame.classList.contains('popup--show')) {
+            popupGame.classList.add('popup--show');
+        }
     }
 }
 
 // вывод сожалений
 function outputBedResult() {
     clearInterval(countTime);
-    popupTime.textContent = min.textContent + ' : ' + sec.textContent;
-    if (!popupLostGame.classList.contains('popup--show')) {
-        popupLostGame.classList.add('popup--show');
+    if (popupTime) {
+        popupTime.textContent = min.textContent + ' : ' + sec.textContent;
+    }
+    if (popupLostGame) {
+        if (!popupLostGame.classList.contains('popup--show')) {
+            popupLostGame.classList.add('popup--show');
+        }
     }
 }
 
 // поворот карты
-cardsItems.addEventListener('click', function (e) {
-    if (
-        e.target.classList.contains('cards__item--turned') &&
-        !e.target.classList.contains('cards__items')
-    ) {
-        e.target.style.backgroundImage = memoryObj.shirt;
-        e.target.classList.toggle('cards__item--turned');
-        firstTurnedCardId = null;
-        firstTurnedCardIndex = null;
-    } else if (!e.target.classList.contains('cards__items')) {
-        e.target.classList.toggle('cards__item--turned');
-        setTimeout(function () {
-            e.target.style.backgroundImage =
-                "url('./img/" + e.target.getAttribute('data-bg') + "')";
-        }, 300);
-        const arrOfCards = document.querySelectorAll('.cards__item');
-        let count = 0;
-
-        for (let i = 0; i < arrOfCards.length; i++) {
-            if (arrOfCards[i].classList.contains('cards__item--turned')) {
-                count++;
-            }
+if (cardsItems) {
+    cardsItems.addEventListener('click', function (e) {
+        const target = e.target as Element;
+        if (target) {
             if (
-                count == 1 &&
-                arrOfCards[i].classList.contains('cards__item--turned')
+                target.classList.contains('cards__item--turned') &&
+                !target.classList.contains('cards__items')
             ) {
-                if (!firstTurnedCardId) {
-                    firstTurnedCardId = arrOfCards[i].getAttribute('data-id');
+                target.style.backgroundImage = memoryObj.shirt;
+                target.classList.toggle('cards__item--turned');
+                firstTurnedCardId = null;
+                firstTurnedCardIndex = null;
+            } else if (!target.classList.contains('cards__items')) {
+                target.classList.toggle('cards__item--turned');
+                setTimeout(function () {
+                    if (target) {
+                        target.style.backgroundImage =
+                            "url('./img/" +
+                            target.getAttribute('data-bg') +
+                            "')";
+                    }
+                }, 300);
+                const arrOfCards = document.querySelectorAll('.cards__item');
+                let count = 0;
+
+                for (let i = 0; i < arrOfCards.length; i++) {
+                    if (
+                        arrOfCards[i].classList.contains('cards__item--turned')
+                    ) {
+                        count++;
+                    }
+                    if (
+                        count == 1 &&
+                        arrOfCards[i].classList.contains('cards__item--turned')
+                    ) {
+                        if (!firstTurnedCardId) {
+                            firstTurnedCardId =
+                                arrOfCards[i].getAttribute('data-id');
+                        }
+                        if (!firstTurnedCardIndex) {
+                            firstTurnedCardIndex = i;
+                        }
+                    }
+                    if (count == 2) {
+                        if (
+                            target.getAttribute('data-id') ==
+                            firstTurnedCardId
+                        ) {
+                            outputResult();
+                        } else {
+                            outputBedResult();
+                        }
+                        break;
+                    }
                 }
-                if (!firstTurnedCardIndex) {
-                    firstTurnedCardIndex = i;
-                }
-            }
-            if (count == 2) {
-                if (e.target.getAttribute('data-id') == firstTurnedCardId) {
-                    outputResult();
-                } else {
-                    outputBedResult();
-                }
-                break;
             }
         }
-    }
-});
+    });
+}
 
-formListLevel.addEventListener('click', function (e) {
-    for (let i = 0; i < formItemLevel.length; i++) {
-        formItemLevel[i].classList.remove('form__active');
-    }
-    e.target.classList.add('form__active');
-    formListLevel.classList.remove('form__active');
-});
+if (formListLevel) {
+    formListLevel.addEventListener('click', function (e) {
+        const target = e.target as Element;
+        for (let i = 0; i < formItemLevel.length; i++) {
+            formItemLevel[i].classList.remove('form__active');
+        }
+        if (target) {
+            target.classList.add('form__active');
+        }
+        formListLevel.classList.remove('form__active');
+    });
+}
 
 // вход в игру
-button.addEventListener('click', function (event) {
-    event.preventDefault();
-    if (formItemLevel) {
-        form.style.display = 'none';
-        cards.style.display = 'block';
-        init(cardsItem);
-        countTime = setInterval(calcTime, 1000);
-    } else {
-        failure.classList.add('popup--show');
-    }
-});
+if (button) {
+    button.addEventListener('click', function (event) {
+        event.preventDefault();
+        if (formItemLevel) {
+            if (form) {
+                form.style.display = 'none';
+            }
+            if (cards) {
+                cards.style.display = 'block';
+            }
+            init(cardsItem);
+            countTime = setInterval(calcTime, 1000);
+        } else {
+            if (failure) {
+                failure.classList.add('popup--show');
+            }
+        }
+    });
+}
 
 // досрочный выход
 let cardsBtnClickHandler = function () {
-    clearInterval(countTime); 
-    calcTime(0, 0, 1); 
-    closeCardsField(); 
-    cards.removeEventListener('click', cardsBtnClickHandler);
+    clearInterval(countTime);
+    calcTime(0, 0, 1);
+    closeCardsField();
+    if (cards) {
+        cards.removeEventListener('click', cardsBtnClickHandler);
+    }
 };
 
-cardsBtn.addEventListener('click', cardsBtnClickHandler);
+if (cardsBtn) {
+    cardsBtn.addEventListener('click', cardsBtnClickHandler);
+}
 
 // новая игра
-popupBtnGame.addEventListener('click', function (event) {
-    if (popupGame.classList.contains('popup--show')) {
-        popupGame.classList.remove('popup--show');
-    } else if (popupLostGame.classList.contains('popup--show')) {
-        popupLostGame.classList.remove('popup--show');
-    }
-    cardsItems.innerHTML = ''; 
-    calcTime(0, 0, 1); 
-    init(cardsItem); 
-    countTime = setInterval(calcTime, 1000);
-});
+if (popupBtnGame) {
+    popupBtnGame.addEventListener('click', function (event) {
+        if (popupGame) {
+            if (popupGame.classList.contains('popup--show')) {
+                popupGame.classList.remove('popup--show');
+            } 
+        }
+        if(popupLostGame){
+            if (popupLostGame.classList.contains('popup--show')) {
+                popupLostGame.classList.remove('popup--show');
+            }
+        }
+        if (cardsItems) {
+            cardsItems.innerHTML = '';
+        }
+        calcTime(0, 0, 1);
+        init(cardsItem);
+        countTime = setInterval(calcTime, 1000);
+    });
+}
