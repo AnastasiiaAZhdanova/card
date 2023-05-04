@@ -196,7 +196,7 @@ function closeCardsField() {
 function outputResult() {
     clearInterval(countTime); // остановка таймера
     if (popupTime) {
-       popupTime.textContent = min.textContent + ' : ' + sec.textContent; // вывод результата таймера
+       popupTime.textContent = min.textContent + ' . ' + sec.textContent; // вывод результата таймера
     }
     if (popupGame) {
         if (!popupGame.classList.contains('popup--show')) {
@@ -209,7 +209,7 @@ function outputResult() {
 function outputBedResult() {
     clearInterval(countTime);
     if (popupTime) {
-        popupTime.textContent = min.textContent + ' : ' + sec.textContent;
+        popupTime.textContent = min.textContent + ' . ' + sec.textContent;
     }
     if (popupLostGame) {
         if (!popupLostGame.classList.contains('popup--show')) {
