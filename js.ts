@@ -71,7 +71,7 @@ const dataOfCards = [
 ];
 
 // перемешивание
-Array.prototype.shuffle = function () {
+Array.prototype.shuffle = function <T>(this: T[]): T[]  {
     for (let i = this.length - 1; i >= 0; i--) {
         let randomIndex = Math.floor(Math.random() * (i + 1));
         let itemAtIndex = this[randomIndex];
