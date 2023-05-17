@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 const assert = require('assert').strict;
 const { calcTime } = require('./tests/calcTime');
 

@@ -152,20 +152,20 @@ function calcTime(sec, min, zeroing) {
 function closeCardsField() {
     cards.style.display = 'none';
     form.style.display = 'block';
-    cardsItems.innerHTML = ''; 
+    cardsItems.innerHTML = '';
 }
 
 function outputResult() {
-    clearInterval(countTime); 
-    popupTime.textContent = min.textContent + ' . ' + sec.textContent; 
+    clearInterval(countTime);
+    popupTime.textContent = min.textContent + ' . ' + sec.textContent;
     if (!popupGame.classList.contains('popup--show')) {
         popupGame.classList.add('popup--show');
     }
 }
 
 function outputBedResult() {
-    clearInterval(countTime); 
-    popupTime.textContent = min.textContent + ' . ' + sec.textContent; 
+    clearInterval(countTime);
+    popupTime.textContent = min.textContent + ' . ' + sec.textContent;
     if (!popupLostGame.classList.contains('popup--show')) {
         popupLostGame.classList.add('popup--show');
     }
