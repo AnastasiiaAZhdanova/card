@@ -1,3 +1,6 @@
+/* stylelint-disable font-family-name-quotes */
+/* stylelint-disable font-family-no-missing-generic-family-keyword */
+/* stylelint-disable selector-class-pattern */
 * {
     margin: 0;
     padding: 0;
@@ -25,7 +28,7 @@
 @font-face {
     font-family: 'StratosSkyeng Medium';
     src: local('StratosSkyeng Medium'),
-        url(./fonts/statosskyeng-v1.001/Desktop\ fonts/stratosskyeng-medium.otf);
+        url('./fonts/statosskyeng-v1.001/Desktop\ fonts/stratosskyeng-medium.otf');
 }
 
 .blue_block_head {
@@ -53,7 +56,7 @@
 .blue_block_items_all {
     width: 98px;
     height: 98px;
-    background: #ffffff;
+    background: #fff;
     border-radius: 12px;
     font-style: normal;
     font-weight: 400;
@@ -79,19 +82,11 @@
     font-size: 24px;
     line-height: 32px;
     font-feature-settings: 'pnum' on, 'lnum' on;
-    color: #ffffff;
+    color: #fff;
 }
 
 .button:hover {
     background: #0080c1;
-}
-
-.cards__item {
-    margin: 1% 0;
-    cursor: pointer;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
 }
 
 .cards__item--turned {
@@ -112,7 +107,7 @@
     font-weight: 400;
     font-size: 64px;
     line-height: 72px;
-    color: #ffffff;
+    color: #fff;
 }
 
 .cards {
@@ -141,7 +136,7 @@
     font-size: 16px;
     line-height: 32px;
     font-feature-settings: 'pnum' on, 'lnum' on;
-    color: #ffffff;
+    color: #fff;
 }
 
 .cards__text_up {
@@ -150,7 +145,7 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 32px;
-    color: #ffffff;
+    color: #fff;
     width: 140px;
     display: flex;
     justify-content: space-between;
@@ -188,19 +183,15 @@
     justify-items: center;
 }
 
-.cards__item--turned {
-    animation-name: rotate;
-    animation-duration: 0.5s;
-    animation-fill-mode: forwards;
-}
-
 @keyframes rotate {
     0% {
         transform: rotate3d(0, 1, 0, 0deg);
     }
+
     50% {
         transform: rotate3d(0, 1, 0, 90deg);
     }
+
     100% {
         transform: rotate3d(0, 1, 0, 0deg);
     }
@@ -251,7 +242,7 @@
     font-weight: 400;
     font-size: 24px;
     line-height: 32px;
-    color: #000000;
+    color: #000;
     padding-left: 120px;
 }
 
@@ -261,7 +252,7 @@
     font-weight: 400;
     font-size: 64px;
     line-height: 72px;
-    color: #000000;
+    color: #000;
     padding-left: 130px;
 }
 
@@ -278,7 +269,7 @@
     font-size: 24px;
     line-height: 32px;
     font-feature-settings: 'pnum' on, 'lnum' on;
-    color: #ffffff;
+    color: #fff;
 }
 
 .popup__btn--game:hover {

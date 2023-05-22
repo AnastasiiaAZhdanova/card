@@ -1,4 +1,4 @@
-import css from './style.css';
+import './style.css';
 
 const button = document.querySelector('.button');
 const formListLevel = document.querySelector('.blue_block_items');
@@ -15,7 +15,7 @@ let countTime;
 const popupGame = document.querySelector('.popup--game');
 const popupLostGame = document.querySelector('.popup_lost--game');
 const failure = document.querySelector('.popup--failure');
-const popupTime = document.querySelector('.popup__title--time'); // поле вывода результата игроку
+const popupTime = document.querySelector('.popup__title--time');
 const popupBtnGame = document.querySelector('.popup__btn--game');
 
 let firstTurnedCardIndex;

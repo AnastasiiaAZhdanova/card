@@ -13,11 +13,6 @@ module.exports = {
     module: {
         rules: [
             {
-                test: /\.ts$/,
-                use: "ts-loader",
-                exclude: /node_modules/,
-              },
-            {
                 test: /\.css$/,
                 sideEffects: true,
                 use: [MiniCssExtractPlugin.loader, 'css-loader'],
@@ -34,8 +29,8 @@ module.exports = {
         ],
     },
     resolve: {
-        extensions: [".ts", ".js"],
-      },
+        extensions: ['.js'],
+    },
     optimization: {
         minimizer: ['...', new CssMinimizerPlugin()],
     },
