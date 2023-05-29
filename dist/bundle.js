@@ -91,7 +91,7 @@
                 (a.dataset.id = k[e].dataId),
                 (a.dataset.bg = k[e].backgroundImage),
                 (a.style.backgroundImage = b.shirt),
-                (a.src = './img/shirt.jpg'),
+                (a.src = './static/img/shirt.jpg'),
                 a
             );
         },
@@ -128,7 +128,9 @@
             t.target.classList.toggle('cards__item--turned'),
                 setTimeout(function () {
                     t.target.style.backgroundImage =
-                        "url('./img/" + t.target.getAttribute('data-bg') + "')";
+                        "url('./static/img/" +
+                        t.target.getAttribute('data-bg') +
+                        "')";
                 }, 300);
             const e = document.querySelectorAll('.cards__item');
             let a = 0;

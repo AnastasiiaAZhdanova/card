@@ -28,7 +28,7 @@
 @font-face {
     font-family: 'StratosSkyeng Medium';
     src: local('StratosSkyeng Medium'),
-        url('./fonts/statosskyeng-v1.001/Desktop\ fonts/stratosskyeng-medium.otf');
+        url('./dist/static/fonts/__MACOSX/statosskyeng-v1.001/Desktop\ fonts/._stratosskyeng-medium.otf');
 }
 
 .blue_block_head {

@@ -109,7 +109,7 @@ let renderCard = function (card, index) {
     newCard.dataset.id = newArrCardsRandomAndSelected[index].dataId;
     newCard.dataset.bg = newArrCardsRandomAndSelected[index].backgroundImage;
     newCard.style.backgroundImage = memoryObj.shirt;
-    newCard.src = './img/shirt.jpg';
+    newCard.src = './static/img/shirt.jpg';
     return newCard;
 };
 
@@ -184,7 +184,7 @@ cardsItems.addEventListener('click', function (e) {
         e.target.classList.toggle('cards__item--turned');
         setTimeout(function () {
             e.target.style.backgroundImage =
-                "url('./img/" + e.target.getAttribute('data-bg') + "')";
+                "url('./static/img/" + e.target.getAttribute('data-bg') + "')";
         }, 300);
         const arrOfCards = document.querySelectorAll('.cards__item');
         let count = 0;
