@@ -86,10 +86,8 @@ const cardsItem = document.createElement('img');
 fragment.appendChild(cardsItem);
 cardsItem.classList.add('cards__item');
 
-function init(obj) {
+function init() {
     dataOfCards.shuffle();
-
-    obj.classList.remove('cards__item--turned');
 
     if (formItemLevel[1].classList.contains('form__active')) {
         randomMixArrays(0, 6);
@@ -206,7 +204,26 @@ cardsItems.addEventListener('click', function (e) {
             }
             if (count === 2) {
                 if (e.target.getAttribute('data-id') === firstTurnedCardId) {
-                    outputResult();
+                    setTimeout(function () {
+                        e.target.style.visibility = 'hidden';
+                        e.target.classList.remove('cards__item--turned');
+                        e.target.classList.remove('cards__item');
+                        arrOfCards[firstTurnedCardIndex].style.visibility =
+                            'hidden';
+                        arrOfCards[firstTurnedCardIndex].classList.remove(
+                            'cards__item--turned'
+                        );
+                        arrOfCards[firstTurnedCardIndex].classList.remove(
+                            'cards__item'
+                        );
+                        firstTurnedCardId = null;
+                        firstTurnedCardIndex = null;
+                    }, 500);
+                    if (arrOfCards.length < 4) {
+                        setTimeout(function () {
+                            outputResult();
+                        }, 700);
+                    }
                 } else {
                     outputBedResult();
                 }
