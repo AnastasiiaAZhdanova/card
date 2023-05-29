@@ -1,7 +1,11 @@
+/* stylelint-disable font-family-name-quotes */
+/* stylelint-disable font-family-no-missing-generic-family-keyword */
+/* stylelint-disable selector-class-pattern */
 * {
     margin: 0;
     padding: 0;
 }
+
 .main {
     width: 100%;
     height: 100vh;
@@ -10,6 +14,7 @@
     justify-content: center;
     align-items: center;
 }
+
 .blue_block {
     width: 480px;
     height: 459px;
@@ -23,12 +28,14 @@
 @font-face {
     font-family: 'StratosSkyeng Medium';
     src: local('StratosSkyeng Medium'),
-        url(./fonts/statosskyeng-v1.001/Desktop\ fonts/stratosskyeng-medium.otf);
+        url('./dist/static/fonts/__MACOSX/statosskyeng-v1.001/Desktop\ fonts/._stratosskyeng-medium.otf');
 }
+
 .blue_block_head {
     width: 208px;
     height: 96px;
 }
+
 .blue_block_head_h1 {
     font-family: 'StratosSkyeng Medium';
     font-style: normal;
@@ -39,15 +46,17 @@
     font-feature-settings: 'pnum' on, 'lnum' on;
     color: #004980;
 }
+
 .blue_block_items {
     display: flex;
     gap: 25px;
     margin-top: 48px;
 }
+
 .blue_block_items_all {
     width: 98px;
     height: 98px;
-    background: #ffffff;
+    background: #fff;
     border-radius: 12px;
     font-style: normal;
     font-weight: 400;
@@ -59,6 +68,7 @@
     color: #0080c1;
     justify-content: center;
 }
+
 .button {
     width: 246px;
     height: 50px;
@@ -72,18 +82,11 @@
     font-size: 24px;
     line-height: 32px;
     font-feature-settings: 'pnum' on, 'lnum' on;
-    color: #ffffff;
-}
-.button:hover {
-    background: #0080c1;
+    color: #fff;
 }
 
-.cards__item {
-    margin: 1% 0;
-    cursor: pointer;
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
+.button:hover {
+    background: #0080c1;
 }
 
 .cards__item--turned {
@@ -104,7 +107,7 @@
     font-weight: 400;
     font-size: 64px;
     line-height: 72px;
-    color: #ffffff;
+    color: #fff;
 }
 
 .cards {
@@ -133,7 +136,7 @@
     font-size: 16px;
     line-height: 32px;
     font-feature-settings: 'pnum' on, 'lnum' on;
-    color: #ffffff;
+    color: #fff;
 }
 
 .cards__text_up {
@@ -142,7 +145,7 @@
     font-weight: 400;
     font-size: 16px;
     line-height: 32px;
-    color: #ffffff;
+    color: #fff;
     width: 140px;
     display: flex;
     justify-content: space-between;
@@ -174,38 +177,27 @@
 
 .cards__items {
     padding-top: 48px;
-    display: flex;
-    flex-wrap: wrap;
-    row-gap: 15px;
-    column-gap: 15px;
-    justify-content: space-around;
-}
-
-.cards__item--turned {
-    animation-name: rotate;
-    animation-duration: 0.5s;
-    animation-fill-mode: forwards;
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+    row-gap: 35px;
+    justify-items: center;
 }
 
 @keyframes rotate {
     0% {
         transform: rotate3d(0, 1, 0, 0deg);
     }
+
     50% {
         transform: rotate3d(0, 1, 0, 90deg);
     }
+
     100% {
         transform: rotate3d(0, 1, 0, 0deg);
     }
 }
 
-.cards__item--low-difficulty {
-    width: 10%;
-    height: 10%;
-}
-
 .popup {
-    /* в скрытом состоянии */
     display: none;
     position: fixed;
     width: 460px;
@@ -215,7 +207,6 @@
 }
 
 .popup--show {
-    /* Отображет popup */
     display: block;
 }
 
@@ -227,6 +218,7 @@
     background: #c2f5ff;
     border-radius: 12px;
     text-align: center;
+    padding-top: 20px;
 }
 
 .popup__head {
@@ -250,7 +242,7 @@
     font-weight: 400;
     font-size: 24px;
     line-height: 32px;
-    color: #000000;
+    color: #000;
     padding-left: 120px;
 }
 
@@ -260,7 +252,7 @@
     font-weight: 400;
     font-size: 64px;
     line-height: 72px;
-    color: #000000;
+    color: #000;
     padding-left: 130px;
 }
 
@@ -277,7 +269,7 @@
     font-size: 24px;
     line-height: 32px;
     font-feature-settings: 'pnum' on, 'lnum' on;
-    color: #ffffff;
+    color: #fff;
 }
 
 .popup__btn--game:hover {

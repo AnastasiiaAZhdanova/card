@@ -8,15 +8,10 @@ const mode =
     process.env.NODE_ENV === 'production' ? 'production' : 'development';
 
 module.exports = {
-    entry: './js.ts',
+    entry: './js.js',
     mode,
     module: {
         rules: [
-            {
-                test: /\.ts$/,
-                use: "ts-loader",
-                exclude: /node_modules/,
-              },
             {
                 test: /\.css$/,
                 sideEffects: true,
@@ -34,8 +29,8 @@ module.exports = {
         ],
     },
     resolve: {
-        extensions: [".ts", ".js"],
-      },
+        extensions: ['.js'],
+    },
     optimization: {
         minimizer: ['...', new CssMinimizerPlugin()],
     },
