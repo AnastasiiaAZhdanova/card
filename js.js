@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 import './style.css';
 
 const button = document.querySelector('.button');
@@ -78,7 +79,7 @@ function randomMixArrays(start, end) {
     let arrCopy = arrCut.slice();
     newArrCardsRandomAndSelected = arrCut.concat(arrCopy);
     newArrCardsRandomAndSelected.shuffle();
-    return newArrCardsRandomAndSelected;
+    return newArrCardsRandomAndSelected
 }
 
 const fragment = document.createDocumentFragment();
@@ -88,6 +89,7 @@ cardsItem.classList.add('cards__item');
 
 function init() {
     dataOfCards.shuffle();
+
 
     if (formItemLevel[1].classList.contains('form__active')) {
         randomMixArrays(0, 6);
@@ -112,6 +114,7 @@ let renderCard = function (card, index) {
 };
 
 let addCards = function () {
+
     for (let i = 0; i < newArrCardsRandomAndSelected.length; i++) {
         let elem = renderCard(newArrCardsRandomAndSelected[i], i);
         elem.className = 'cards__item';
@@ -123,6 +126,17 @@ let addCards = function () {
         }
         cardsItems.appendChild(elem);
     }
+    const shirts = document.querySelectorAll('.cards__item');
+    shirts.forEach((el) => {
+        el.setAttribute('src', `static/img/${el.getAttribute('data-bg')}`)
+    })
+    setTimeout(() => {
+        shirts.forEach((el) => {
+            el.setAttribute('src', `static/img/shirt.jpg`)
+        })
+        countTime = setInterval(calcTime, 1000);
+    },5000)
+   
 };
 
 function calcTime(sec, min, zeroing) {
@@ -170,10 +184,7 @@ function outputBedResult() {
 }
 
 cardsItems.addEventListener('click', function (e) {
-    if (
-        e.target.classList.contains('cards__item--turned') &&
-        !e.target.classList.contains('cards__items')
-    ) {
+    if (e.target.classList.contains('cards__item--turned') && !e.target.classList.contains('cards__items')) {
         e.target.style.backgroundImage = memoryObj.shirt;
         e.target.classList.toggle('cards__item--turned');
         firstTurnedCardId = null;
@@ -181,8 +192,8 @@ cardsItems.addEventListener('click', function (e) {
     } else if (!e.target.classList.contains('cards__items')) {
         e.target.classList.toggle('cards__item--turned');
         setTimeout(function () {
-            e.target.style.backgroundImage =
-                "url('./static/img/" + e.target.getAttribute('data-bg') + "')";
+            console.log(e.target.getAttribute('data-bg'));
+            e.target.setAttribute('src', `static/img/${e.target.getAttribute('data-bg')}`);
         }, 300);
         const arrOfCards = document.querySelectorAll('.cards__item');
         let count = 0;
@@ -191,10 +202,7 @@ cardsItems.addEventListener('click', function (e) {
             if (arrOfCards[i].classList.contains('cards__item--turned')) {
                 count++;
             }
-            if (
-                count === 1 &&
-                arrOfCards[i].classList.contains('cards__item--turned')
-            ) {
+            if (count === 1 && arrOfCards[i].classList.contains('cards__item--turned')) {
                 if (!firstTurnedCardId) {
                     firstTurnedCardId = arrOfCards[i].getAttribute('data-id');
                 }
@@ -208,14 +216,9 @@ cardsItems.addEventListener('click', function (e) {
                         e.target.style.visibility = 'hidden';
                         e.target.classList.remove('cards__item--turned');
                         e.target.classList.remove('cards__item');
-                        arrOfCards[firstTurnedCardIndex].style.visibility =
-                            'hidden';
-                        arrOfCards[firstTurnedCardIndex].classList.remove(
-                            'cards__item--turned'
-                        );
-                        arrOfCards[firstTurnedCardIndex].classList.remove(
-                            'cards__item'
-                        );
+                        arrOfCards[firstTurnedCardIndex].style.visibility = 'hidden';
+                        arrOfCards[firstTurnedCardIndex].classList.remove('cards__item--turned');
+                        arrOfCards[firstTurnedCardIndex].classList.remove('cards__item');
                         firstTurnedCardId = null;
                         firstTurnedCardIndex = null;
                     }, 500);
@@ -247,7 +250,6 @@ button.addEventListener('click', function (event) {
         form.style.display = 'none';
         cards.style.display = 'block';
         init(cardsItem);
-        countTime = setInterval(calcTime, 1000);
     } else {
         failure.classList.add('popup--show');
     }
