@@ -123,6 +123,16 @@ let addCards = function () {
         }
         cardsItems.appendChild(elem);
     }
+    const shirts = document.querySelectorAll('.cards__item');
+    shirts.forEach((el) => {
+        el.setAttribute('src', `static/img/${el.getAttribute('data-bg')}`);
+    });
+    setTimeout(() => {
+        shirts.forEach((el) => {
+            el.setAttribute('src', `static/img/shirt.jpg`);
+        });
+        countTime = setInterval(calcTime, 1000);
+    }, 5000);
 };
 
 function calcTime(sec, min, zeroing) {
@@ -181,8 +191,12 @@ cardsItems.addEventListener('click', function (e) {
     } else if (!e.target.classList.contains('cards__items')) {
         e.target.classList.toggle('cards__item--turned');
         setTimeout(function () {
-            e.target.style.backgroundImage =
-                "url('./static/img/" + e.target.getAttribute('data-bg') + "')";
+            //e.target.style.backgroundImage =
+            //"url('./static/img/" + e.target.getAttribute('data-bg') + "')";
+            e.target.setAttribute(
+                'src',
+                `static/img/${e.target.getAttribute('data-bg')}`
+            );
         }, 300);
         const arrOfCards = document.querySelectorAll('.cards__item');
         let count = 0;
