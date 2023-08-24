@@ -119,7 +119,6 @@
     margin: 0 auto;
     margin-top: 20px;
     margin-bottom: 20px;
-    z-index: 1;
     background: #004980;
 }
 
@@ -203,7 +202,6 @@
     width: 460px;
     left: 35%;
     top: 25%;
-    z-index: 5;
 }
 
 .popup--show {

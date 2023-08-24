@@ -159,7 +159,7 @@ function calcTime(sec, min, zeroing) {
 
 function closeCardsField() {
     cards.style.display = 'none';
-    form.style.display = 'block';
+    form.style.display = 'flex';
     cardsItems.innerHTML = '';
 }
 
@@ -191,8 +191,6 @@ cardsItems.addEventListener('click', function (e) {
     } else if (!e.target.classList.contains('cards__items')) {
         e.target.classList.toggle('cards__item--turned');
         setTimeout(function () {
-            //e.target.style.backgroundImage =
-            //"url('./static/img/" + e.target.getAttribute('data-bg') + "')";
             e.target.setAttribute(
                 'src',
                 `static/img/${e.target.getAttribute('data-bg')}`
@@ -272,6 +270,11 @@ let cardsBtnClickHandler = function () {
     calcTime(0, 0, 1);
     closeCardsField();
     cards.removeEventListener('click', cardsBtnClickHandler);
+    if (popupGame.classList.contains('popup--show')) {
+        popupGame.classList.remove('popup--show');
+    } else if (popupLostGame.classList.contains('popup--show')) {
+        popupLostGame.classList.remove('popup--show');
+    }
 };
 
 cardsBtn.addEventListener('click', cardsBtnClickHandler);
