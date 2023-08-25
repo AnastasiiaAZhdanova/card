@@ -131,6 +131,7 @@ let addCards = function () {
         shirts.forEach((el) => {
             el.setAttribute('src', `static/img/shirt.jpg`);
         });
+        clearInterval(countTime);
         countTime = setInterval(calcTime, 1000);
     }, 5000);
 };
