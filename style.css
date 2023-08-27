@@ -220,7 +220,7 @@
 }
 
 .popup__head {
-    width: 276px;
+    
     left: 374px;
     top: 289px;
     font-family: 'StratosSkyeng';
@@ -229,7 +229,7 @@
     font-size: 40px;
     line-height: 48px;
     color: #004980;
-    padding-left: 100px;
+    
 }
 
 .popup__title {
@@ -254,13 +254,39 @@
     padding-left: 130px;
 }
 
+.popup__title__else--time {
+    font-family: 'StratosSkyeng';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 64px;
+    line-height: 72px;
+    color: #000;
+    padding-left: 130px;
+}
+
 .popup__btn--game {
     width: 246px;
     height: 50px;
     background: #7ac100;
     border-radius: 12px;
     border-style: none;
-    margin-top: 47px;
+    margin-top: 30px;
+    font-family: 'StratosSkyeng Medium';
+    font-style: normal;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 32px;
+    font-feature-settings: 'pnum' on, 'lnum' on;
+    color: #fff;
+}
+
+.popup__btn__lost--game{
+    width: 246px;
+    height: 50px;
+    background: #7ac100;
+    border-radius: 12px;
+    border-style: none;
+    margin-top: 30px;
     font-family: 'StratosSkyeng Medium';
     font-style: normal;
     font-weight: 400;

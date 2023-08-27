@@ -14,9 +14,10 @@ let countTime;
 
 const popupGame = document.querySelector('.popup--game');
 const popupLostGame = document.querySelector('.popup_lost--game');
-const failure = document.querySelector('.popup--failure');
 const popupTime = document.querySelector('.popup__title--time');
+const popupTimeElse = document.querySelector('.popup__title__else--time');
 const popupBtnGame = document.querySelector('.popup__btn--game');
+const popupBtnGameLost = document.querySelector('.popup__btn__lost--game');
 
 let firstTurnedCardIndex;
 let firstTurnedCardId;
@@ -174,7 +175,7 @@ function outputResult() {
 
 function outputBedResult() {
     clearInterval(countTime);
-    popupTime.textContent = min.textContent + ' . ' + sec.textContent;
+    popupTimeElse.textContent = min.textContent + ' . ' + sec.textContent;
     if (!popupLostGame.classList.contains('popup--show')) {
         popupLostGame.classList.add('popup--show');
     }
@@ -261,8 +262,6 @@ button.addEventListener('click', function (event) {
         cards.style.display = 'block';
         init(cardsItem);
         countTime = setInterval(calcTime, 1000);
-    } else {
-        failure.classList.add('popup--show');
     }
 });
 
@@ -283,7 +282,15 @@ cardsBtn.addEventListener('click', cardsBtnClickHandler);
 popupBtnGame.addEventListener('click', function () {
     if (popupGame.classList.contains('popup--show')) {
         popupGame.classList.remove('popup--show');
-    } else if (popupLostGame.classList.contains('popup--show')) {
+    }
+    cardsItems.innerHTML = '';
+    calcTime(0, 0, 1);
+    init(cardsItem);
+    countTime = setInterval(calcTime, 1000);
+});
+
+popupBtnGameLost.addEventListener('click', function () {
+    if (popupLostGame.classList.contains('popup--show')) {
         popupLostGame.classList.remove('popup--show');
     }
     cardsItems.innerHTML = '';
