@@ -128,6 +128,7 @@ let addCards = function () {
     shirts.forEach((el) => {
         el.setAttribute('src', `static/img/${el.getAttribute('data-bg')}`);
     });
+    clearInterval(countTime);
     setTimeout(() => {
         shirts.forEach((el) => {
             el.setAttribute('src', `static/img/shirt.jpg`);
@@ -240,6 +241,8 @@ cardsItems.addEventListener('click', function (e) {
                     }
                 } else {
                     outputBedResult();
+                    firstTurnedCardId = null;
+                    firstTurnedCardIndex = null;
                 }
                 break;
             }
@@ -272,7 +275,8 @@ let cardsBtnClickHandler = function () {
     cards.removeEventListener('click', cardsBtnClickHandler);
     if (popupGame.classList.contains('popup--show')) {
         popupGame.classList.remove('popup--show');
-    } else if (popupLostGame.classList.contains('popup--show')) {
+    }
+    if (popupLostGame.classList.contains('popup--show')) {
         popupLostGame.classList.remove('popup--show');
     }
 };

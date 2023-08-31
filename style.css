@@ -220,7 +220,6 @@
 }
 
 .popup__head {
-    
     left: 374px;
     top: 289px;
     font-family: 'StratosSkyeng';
@@ -229,7 +228,6 @@
     font-size: 40px;
     line-height: 48px;
     color: #004980;
-    
 }
 
 .popup__title {
@@ -280,7 +278,7 @@
     color: #fff;
 }
 
-.popup__btn__lost--game{
+.popup__btn__lost--game {
     width: 246px;
     height: 50px;
     background: #7ac100;
