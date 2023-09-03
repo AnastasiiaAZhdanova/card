@@ -14,9 +14,10 @@ let countTime;
 
 const popupGame = document.querySelector('.popup--game');
 const popupLostGame = document.querySelector('.popup_lost--game');
-const failure = document.querySelector('.popup--failure');
 const popupTime = document.querySelector('.popup__title--time');
+const popupTimeElse = document.querySelector('.popup__title__else--time');
 const popupBtnGame = document.querySelector('.popup__btn--game');
+const popupBtnGameLost = document.querySelector('.popup__btn__lost--game');
 
 let firstTurnedCardIndex;
 let firstTurnedCardId;
@@ -127,10 +128,12 @@ let addCards = function () {
     shirts.forEach((el) => {
         el.setAttribute('src', `static/img/${el.getAttribute('data-bg')}`);
     });
+    clearInterval(countTime);
     setTimeout(() => {
         shirts.forEach((el) => {
             el.setAttribute('src', `static/img/shirt.jpg`);
         });
+        clearInterval(countTime);
         countTime = setInterval(calcTime, 1000);
     }, 5000);
 };
@@ -159,7 +162,7 @@ function calcTime(sec, min, zeroing) {
 
 function closeCardsField() {
     cards.style.display = 'none';
-    form.style.display = 'block';
+    form.style.display = 'flex';
     cardsItems.innerHTML = '';
 }
 
@@ -173,7 +176,7 @@ function outputResult() {
 
 function outputBedResult() {
     clearInterval(countTime);
-    popupTime.textContent = min.textContent + ' . ' + sec.textContent;
+    popupTimeElse.textContent = min.textContent + ' . ' + sec.textContent;
     if (!popupLostGame.classList.contains('popup--show')) {
         popupLostGame.classList.add('popup--show');
     }
@@ -191,8 +194,6 @@ cardsItems.addEventListener('click', function (e) {
     } else if (!e.target.classList.contains('cards__items')) {
         e.target.classList.toggle('cards__item--turned');
         setTimeout(function () {
-            //e.target.style.backgroundImage =
-            //"url('./static/img/" + e.target.getAttribute('data-bg') + "')";
             e.target.setAttribute(
                 'src',
                 `static/img/${e.target.getAttribute('data-bg')}`
@@ -240,6 +241,8 @@ cardsItems.addEventListener('click', function (e) {
                     }
                 } else {
                     outputBedResult();
+                    firstTurnedCardId = null;
+                    firstTurnedCardIndex = null;
                 }
                 break;
             }
@@ -262,8 +265,6 @@ button.addEventListener('click', function (event) {
         cards.style.display = 'block';
         init(cardsItem);
         countTime = setInterval(calcTime, 1000);
-    } else {
-        failure.classList.add('popup--show');
     }
 });
 
@@ -272,6 +273,12 @@ let cardsBtnClickHandler = function () {
     calcTime(0, 0, 1);
     closeCardsField();
     cards.removeEventListener('click', cardsBtnClickHandler);
+    if (popupGame.classList.contains('popup--show')) {
+        popupGame.classList.remove('popup--show');
+    }
+    if (popupLostGame.classList.contains('popup--show')) {
+        popupLostGame.classList.remove('popup--show');
+    }
 };
 
 cardsBtn.addEventListener('click', cardsBtnClickHandler);
@@ -279,7 +286,15 @@ cardsBtn.addEventListener('click', cardsBtnClickHandler);
 popupBtnGame.addEventListener('click', function () {
     if (popupGame.classList.contains('popup--show')) {
         popupGame.classList.remove('popup--show');
-    } else if (popupLostGame.classList.contains('popup--show')) {
+    }
+    cardsItems.innerHTML = '';
+    calcTime(0, 0, 1);
+    init(cardsItem);
+    countTime = setInterval(calcTime, 1000);
+});
+
+popupBtnGameLost.addEventListener('click', function () {
+    if (popupLostGame.classList.contains('popup--show')) {
         popupLostGame.classList.remove('popup--show');
     }
     cardsItems.innerHTML = '';
